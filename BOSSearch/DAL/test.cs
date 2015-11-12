@@ -7,5 +7,6 @@ namespace BOSSearch.DAL
 {
     public class test
     {
+        //
     }
 }
