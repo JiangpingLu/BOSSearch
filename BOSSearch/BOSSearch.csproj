@@ -155,6 +155,7 @@
     <Compile Include="Controllers\GetCompanyDetailController.cs" />
     <Compile Include="Controllers\GetCompanyStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\test.cs" />
     <Compile Include="Instrument\Constants.cs" />
     <Compile Include="Instrument\Instrument.cs" />
     <Compile Include="Global.asax.cs">
@@ -221,7 +222,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="BLL\" />
-    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
