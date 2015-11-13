@@ -23,12 +23,12 @@ namespace BOSSearch.Controllers
         public List<PartySearchResult> GetParties(string partyname, string city, string state)
         {
             //build request
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Constants.APIURL_PublicTest);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Prodect);
             request.Method = "POST";
             request.ContentType = "application/xml";
             request.Headers.Add("usmdm-action", "SB4C");
-            request.Headers.Add("APIkey", Constants.APIkey);
-            request.Headers.Add("APIKeySecret", Constants.APIKeySecret);
+            request.Headers.Add("APIkey", Constants.APIkey_Product);
+            request.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
 
             //pass data
             Instrument instrument = new Instrument();
