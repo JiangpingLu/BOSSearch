@@ -11,6 +11,8 @@ namespace BOSSearch.Controllers
         public ActionResult Index()
         {
             return View();
+
+
         }
 
       
