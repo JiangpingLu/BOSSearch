@@ -23,7 +23,7 @@ namespace BOSSearch.Controllers
         public List<PartySearchResult> GetParties(string partyname, string city, string state)
         {
             //build request
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Constants.APIURL);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Constants.APIURL_PublicTest);
             request.Method = "POST";
             request.ContentType = "application/xml";
             request.Headers.Add("usmdm-action", "SB4C");
