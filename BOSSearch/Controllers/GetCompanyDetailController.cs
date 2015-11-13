@@ -24,18 +24,12 @@ namespace BOSSearch.Controllers
         /// <param name="sourcePartyId"></param>
         /// <param name="partyId"></param>
         /// <returns></returns>
-        public object GetPartyDetails(string sourcePartyId,bool IsProduct)
+        public object GetPartyDetails(string sourcePartyId)
         {
             string responcontent = string.Empty;
             string url = string.Empty;
-            if (IsProduct)
-            {
-                url = Constants.APIURL_Prodect;
-            }
-            else
-            {
-                url = Constants.APIURL_PublicTest;
-            }
+            url = Constants.APIURL_Prodect;
+            //url = Constants.APIURL_PublicTest;
             StringBuilder sbParam = new StringBuilder();
             Instrument instrument = new Instrument();
             PartyDetailSearchResult res = new PartyDetailSearchResult();
@@ -54,17 +48,11 @@ namespace BOSSearch.Controllers
             httpWebRequest.Method = "POST";
             //httpWebRequest.Host = "apimstg.pwc.com:443";
             httpWebRequest.Headers.Add("usmdm-action", "GET");
-            if (IsProduct)
-            {
-                httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
-                httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
-            }
-            else
-            {
-                httpWebRequest.Headers.Add("APIkey", Constants.APIkey);
-                httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret);
-            }
-
+            httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
+            httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
+            //httpWebRequest.Headers.Add("APIkey", Constants.APIkey);
+            //httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret);
+            
             byte[] bs = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
             httpWebRequest.ContentLength = bs.Length;
             using (Stream stream = httpWebRequest.GetRequestStream())
