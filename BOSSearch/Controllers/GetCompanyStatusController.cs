@@ -186,6 +186,7 @@ namespace BOSSearch.Controllers
                                                                            //    Desc = GetElementValue(address.Element("country").Element("desc"))
                                                                            //},
                                                                            //PostalCode = GetElementValue(address.Element("postalCode"))
+                                                                           ZipCode = instrument.GetElementValue(address.Element("postalCode"))
                                                                        }).ToList(),
                                                    //EncryptedDUNS = party.Element("encryptedDUNS").Value
                                                }).ToList();

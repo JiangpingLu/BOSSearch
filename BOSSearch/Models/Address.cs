@@ -16,5 +16,7 @@ namespace BOSSearch.Models
         public string State { get; set; }
         //public CodeDesc Country { get; set; }
         //public string PostalCode { get; set; }
+
+        public string ZipCode { get; set; }
     }
 }
