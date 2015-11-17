@@ -24,7 +24,7 @@ namespace BOSSearch.Controllers
         /// <param name="sourcePartyId"></param>
         /// <param name="partyId"></param>
         /// <returns></returns>
-        public object GetPartyDetails(string sourcePartyId,bool IsProduct)
+        public object GetPartyDetails(string sourcePartyId)
         {
             string responcontent = string.Empty;
             string url = string.Empty;
