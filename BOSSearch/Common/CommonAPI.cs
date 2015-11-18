@@ -1,4 +1,25 @@
-﻿using System;
+﻿//-------------------------------------------------------------------------------
+// <Copyright file="CommonAPI.cs" company="PwC">
+// © 2014 PwC. All rights reserved.
+// </Copyright>
+// "PwC" refers to PricewaterhouseCoopers LLP, a Delaware limited liability 
+// partnership, which is a member firm of PricewaterhouseCoopers International 
+// Limited, each member firm of which is a separate legal entity.
+// ---------------------------------------------------------------------------------
+//	File Description	: It's the business controller code for the function of GetPartyDetails 
+// ---------------------------------------------------------------------------------
+//	Date Created		: ‎Nov ‎11, ‎2015
+//	Author			    : <Jiangping Lu>, SDC Shanghai
+// ---------------------------------------------------------------------------------
+// 	Change History
+//          Add porduct line URL and APIKey
+//	Date Modified		: Nov 16, 2015
+//	Changed By	        : Jiangping Lu(AJ)
+//	Change Description  : Add Product line URL and change APIKey and APIKeySecret for product line test
+//  Issue number        : 1.0
+/////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +31,11 @@ namespace BOSSearch.Common
 {
     public class CommonAPI
     {
+        /// <summary>
+        /// change xml document to json
+        /// </summary>
+        /// <param name="xmlDoc"></param>
+        /// <returns></returns>
         public static string XmlToJson(XmlDocument xmlDoc)
         {
             StringBuilder sbJson = new StringBuilder();
@@ -19,6 +45,12 @@ namespace BOSSearch.Common
             return sbJson.ToString();
         }
 
+        /// <summary>
+        /// change xml to json by node
+        /// </summary>
+        /// <param name="sbJson"></param>
+        /// <param name="node"></param>
+        /// <param name="showNodeName"></param>
         private static void XmlToJSONnode(StringBuilder sbJson, XmlElement node, bool showNodeName)
         {
             if (showNodeName)
@@ -62,6 +94,12 @@ namespace BOSSearch.Common
             sbJson.Append(" }");
         }
 
+        /// <summary>
+        /// store child node into xml document
+        /// </summary>
+        /// <param name="childNodeNames"></param>
+        /// <param name="nodeName"></param>
+        /// <param name="nodeValue"></param>
         private static void StoreChildNode(SortedList childNodeNames, string nodeName, object nodeValue)
         {
             // Pre-process contraction of XmlElement-s
@@ -93,6 +131,13 @@ namespace BOSSearch.Common
             ValuesAL.Add(nodeValue);
         }
 
+        /// <summary>
+        /// output node from xml document
+        /// </summary>
+        /// <param name="childname"></param>
+        /// <param name="alChild"></param>
+        /// <param name="sbJSON"></param>
+        /// <param name="showNodeName"></param>
         private static void OutputNode(string childname, object alChild, StringBuilder sbJSON, bool showNodeName)
         {
             if (alChild == null)
@@ -114,6 +159,11 @@ namespace BOSSearch.Common
             sbJSON.Append(", ");
         }
 
+        /// <summary>
+        /// change string to safe json
+        /// </summary>
+        /// <param name="sIn"></param>
+        /// <returns></returns>
         private static string SafeJSON(string sIn)
         {
             StringBuilder sbOut = new StringBuilder(sIn.Length);

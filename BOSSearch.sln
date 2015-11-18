@@ -3,19 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BOSSearch", "BOSSearch\BOSSearch.csproj", "{0D3E5FA9-E6B7-49C6-B805-48C81C05B654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PWC.US.V1.BOSSearch", "BOSSearch\PWC.US.V1.BOSSearch.csproj", "{0D3E5FA9-E6B7-49C6-B805-48C81C05B654}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://bosmvp.visualstudio.com/defaultcollection
-		SccProjectUniqueName0 = BOSSearch\\BOSSearch.csproj
-		SccProjectName0 = BOSSearch
-		SccAuxPath0 = https://bosmvp.visualstudio.com/defaultcollection
-		SccLocalPath0 = BOSSearch
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

@@ -1,4 +1,31 @@
-﻿using System;
+﻿//-------------------------------------------------------------------------------
+// <Copyright file="GetCompanyDetailController.cs" company="PwC">
+// © 2014 PwC. All rights reserved.
+// </Copyright>
+// "PwC" refers to PricewaterhouseCoopers LLP, a Delaware limited liability 
+// partnership, which is a member firm of PricewaterhouseCoopers International 
+// Limited, each member firm of which is a separate legal entity.
+// ---------------------------------------------------------------------------------
+//	File Description	: It's the business controller code for the function of GetPartyDetails 
+// ---------------------------------------------------------------------------------
+//	Date Created		: ‎Nov ‎11, ‎2015
+//	Author			    : <Jiangping Lu>, SDC Shanghai
+// ---------------------------------------------------------------------------------
+// 	Change History
+//          Add porduct line URL and APIKey
+//	Date Modified		: Nov 16, 2015
+//	Changed By	        : Jiangping Lu(AJ)
+//	Change Description  : Add Product line URL and change APIKey and APIKeySecret for product line test
+//  Issue number        : 1.0
+//          layout format
+//	Date Modified		: Nov 18, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.1
+/////////////////////////////////////////////////////////////////////////////////////////
+
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,80 +53,74 @@ namespace BOSSearch.Controllers
         /// <returns></returns>
         public object GetPartyDetails(string sourcePartyId)
         {
-            string responcontent = string.Empty;
-            string url = string.Empty;
-            url = Constants.APIURL_Prodect;
-            //url = Constants.APIURL_PublicTest;
+            string responeContent = string.Empty;
+            string serviceURL = string.Empty;
+            serviceURL = Constants.APIURL_Prodect;
             StringBuilder sbParam = new StringBuilder();
-            Instrument instrument = new Instrument();
-            PartyDetailSearchResult res = new PartyDetailSearchResult();
+            Instrument inStrument = new Instrument();
+            PartyDetailSearchResult partyResult = new PartyDetailSearchResult();
 
             if (string.IsNullOrEmpty(sourcePartyId))
             {
                 return null;
             }
-            sourcePartyId = instrument.HandleSpecialCharacters(sourcePartyId);
+            sourcePartyId = inStrument.HandleSpecialCharacters(sourcePartyId);
 
             sbParam = GetParams(sourcePartyId);
-            url =url + "?" + sbParam.ToString();
+            serviceURL = serviceURL + "?" + sbParam.ToString();
 
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(serviceURL);
             httpWebRequest.ContentType = "application/xml";
             httpWebRequest.Method = "POST";
-            //httpWebRequest.Host = "apimstg.pwc.com:443";
             httpWebRequest.Headers.Add("usmdm-action", "GET");
             httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
             httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
-            //httpWebRequest.Headers.Add("APIkey", Constants.APIkey);
-            //httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret);
             
-
-            byte[] bs = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
-            httpWebRequest.ContentLength = bs.Length;
+            byte[] bStream = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
+            httpWebRequest.ContentLength = bStream.Length;
             using (Stream stream = httpWebRequest.GetRequestStream())
             {
-                stream.Write(bs, 0, bs.Length);
+                stream.Write(bStream, 0, bStream.Length);
             }
             try
             {
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                StreamReader streamreader = new StreamReader(httpWebResponse.GetResponseStream(), UTF8Encoding.UTF8);
-                responcontent = streamreader.ReadToEnd();
+                StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), UTF8Encoding.UTF8);
+                responeContent = streamReader.ReadToEnd();
                 httpWebResponse.Close();
-                streamreader.Close();
+                streamReader.Close();
 
-                if (responcontent.Trim().Length <= 0)
+                if (responeContent.Trim().Length <= 0)
                 {
                     return null;
                 }
-                XmlDocument doc = instrument.GetXmlDocByXmlContent(responcontent);
+                XmlDocument xmlDoc = inStrument.GetXmlDocByXmlContent(responeContent);
                 string[] paramArray = { };
-                string value = instrument.GetNodeValue(doc, "overallStatus", paramArray);
-                string desc = instrument.GetNodeValue(doc, "statusMessageDescription", paramArray);
+                string statusValue = inStrument.GetNodeValue(xmlDoc, "overallStatus", paramArray);
+                string statusDesc = inStrument.GetNodeValue(xmlDoc, "statusMessageDescription", paramArray);
 
-                XDocument xdoc = XDocument.Parse(responcontent);
-                if (value.Equals("Success"))
+                XDocument xdoc = XDocument.Parse(responeContent);
+                if (statusValue.Equals("Success"))
                 {
-                    res = GetPartyFromXML(xdoc);
+                    partyResult = GetPartyFromXML(xdoc);
                     //res = new JavaScriptSerializer().Serialize(GetPartyFromXML(xdoc));
                 }
                 else
                 {
-                    res.IndependenceStatus = desc;
-                    res.IndependenceStatusCode = "-1";
+                    partyResult.IndependenceStatus = statusDesc;
+                    partyResult.IndependenceStatusCode = "-1";
                 }
             }
             catch (Exception ex)
             {
-                res.IndependenceStatusCode = "-1";
-                res.IndependenceStatus = ex.Message;
-                //T0 DO
-            }            
-            return res;
+                partyResult.IndependenceStatusCode = "-1";
+                partyResult.IndependenceStatus = ex.Message;
+            }
+            return partyResult;
         }
 
         /// <summary>
-        /// sourcePartyID和partyId参数整理
+        /// prepare for params of sourcePartyID and partyId
         /// </summary>
         /// <param name="sourcePartyId"></param>
         /// <param name="partyId"></param>
@@ -119,22 +140,27 @@ namespace BOSSearch.Controllers
             return sbParam;
         }
 
-        private PartyDetailSearchResult GetPartyFromXML(XDocument doc)
+        /// <summary>
+        /// Get party details of code and desc in xml
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private PartyDetailSearchResult GetPartyFromXML(XDocument xmlDoc)
         {
-            Instrument instrument = new Instrument();
-            List<SourceParty> parties = (from sourceParty in doc.Descendants("responseGetParty").Elements("party")
+            Instrument inStrument = new Instrument();
+            List<SourceParty> sourceParties = (from sourceParty in xmlDoc.Descendants("responseGetParty").Elements("party")
                                          select new SourceParty
                                                {
                                                    independenceRestrictionStatus = new CodeDesc
                                                    {
-                                                       Code = instrument.GetElementValue(sourceParty.Element("independenceRestrictionStatus").Element("code")), //需要返回的Independence status code
-                                                       Desc = instrument.GetElementValue(sourceParty.Element("independenceRestrictionStatus").Element("desc")), //需要返回的Independence status
+                                                       Code = inStrument.GetElementValue(sourceParty.Element("independenceRestrictionStatus").Element("code")), //需要返回的Independence status code
+                                                       Desc = inStrument.GetElementValue(sourceParty.Element("independenceRestrictionStatus").Element("desc")), //需要返回的Independence status
                                                    }
                                                }).ToList();
             PartyDetailSearchResult partyDetailSearchResult = new PartyDetailSearchResult
             {
-                IndependenceStatus = parties[0].independenceRestrictionStatus.Desc,
-                IndependenceStatusCode = parties[0].independenceRestrictionStatus.Code
+                IndependenceStatus = sourceParties[0].independenceRestrictionStatus.Desc,
+                IndependenceStatusCode = sourceParties[0].independenceRestrictionStatus.Code
             };
             return partyDetailSearchResult;
         }
