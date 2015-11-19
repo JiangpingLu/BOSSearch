@@ -24,7 +24,7 @@
 //  Issue number        : 1.1
 /////////////////////////////////////////////////////////////////////////////////////////
 
-namespace BOSSearch.Migrations
+namespace PWC.US.USTO.BOSSearch.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

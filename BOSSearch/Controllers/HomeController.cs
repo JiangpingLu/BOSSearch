@@ -25,7 +25,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace BOSSearch.Controllers
+namespace PWC.US.USTO.BOSSearch.Controllers
 {
     public class HomeController : Controller
     {

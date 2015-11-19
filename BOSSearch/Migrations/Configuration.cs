@@ -24,22 +24,22 @@
 //  Issue number        : 1.1
 /////////////////////////////////////////////////////////////////////////////////////////
 
-namespace BOSSearch.Migrations
+namespace PWC.US.USTO.BOSSearch.Migrations
 {
-    using BOSSearch.Models;
+    using PWC.US.USTO.BOSSearch.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BOSSearch.Models.BOSSearchContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PWC.US.USTO.BOSSearch.Models.BOSSearchContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BOSSearch.Models.BOSSearchContext context)
+        protected override void Seed(PWC.US.USTO.BOSSearch.Models.BOSSearchContext context)
         {
             //  This method will be called after migrating to the latest version.
 

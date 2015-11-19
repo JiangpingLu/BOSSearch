@@ -25,7 +25,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 
-namespace BOSSearch.Models
+namespace PWC.US.USTO.BOSSearch.Models
 {
     public class Company
     {

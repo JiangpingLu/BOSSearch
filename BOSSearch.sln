@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PWC.US.V1.BOSSearch", "BOSSearch\PWC.US.V1.BOSSearch.csproj", "{0D3E5FA9-E6B7-49C6-B805-48C81C05B654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PWC.US.USTO.BOSSearch", "BOSSearch\PWC.US.USTO.BOSSearch.csproj", "{0D3E5FA9-E6B7-49C6-B805-48C81C05B654}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

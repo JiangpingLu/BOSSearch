@@ -28,10 +28,15 @@ using System.Xml;
 using System.IO;
 using System.Xml.Linq; 
 
-namespace BOSSearch.Function
+namespace PWC.US.USTO.BOSSearch.Function
 {
     public class Instrument
     {
+        /// <summary>
+        /// Get Element value by XElement
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public string GetElementValue(XElement element)
         {
             if (null != element)
@@ -41,6 +46,12 @@ namespace BOSSearch.Function
 
             return string.Empty;
         }
+
+        /// <summary>
+        /// convert special characters to ESC
+        /// </summary>
+        /// <param name="rawstr"></param>
+        /// <returns></returns>
         public string HandleSpecialCharacters(string rawstr)
         {
             if (string.IsNullOrEmpty(rawstr))
@@ -55,7 +66,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// XML转Json
+        /// change format from XML to Json
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
@@ -75,7 +86,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// 根据XML文件内容获取XmlDocument对象
+        /// Get XmlDocument object from xml file
         /// </summary>
         /// <param name="xmlFileContent"></param>
         /// <returns></returns>
@@ -100,7 +111,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// 根据XML文件路径获取XmlDocument对象
+        /// Get XmlDocument object by xml file path
         /// </summary>
         /// <param name="xmlFilePath"></param>
         /// <returns></returns>
@@ -125,7 +136,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// 获取指定节点值
+        /// Get node value by nodename
         /// </summary>
         /// <param name="doc"></param>
         /// <param name="nodeName">节点名</param>

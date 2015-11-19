@@ -33,9 +33,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BOSSearch.Models;
+using PWC.US.USTO.BOSSearch.Models;
 
-namespace BOSSearch.Controllers
+namespace PWC.US.USTO.BOSSearch.Controllers
 {
     public class CompaniesController : ApiController
     {

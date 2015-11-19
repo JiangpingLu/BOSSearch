@@ -27,7 +27,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 
-namespace BOSSearch.Common
+namespace PWC.US.USTO.BOSSearch.Common
 {
     public class CommonAPI
     {

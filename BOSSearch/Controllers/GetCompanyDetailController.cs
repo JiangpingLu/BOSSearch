@@ -32,12 +32,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Http;
-using BOSSearch.Function;
+using PWC.US.USTO.BOSSearch.Function;
 using System.Xml.Linq;
 using System.Xml;
-using BOSSearch.Models;
+using PWC.US.USTO.BOSSearch.Models;
 
-namespace BOSSearch.Controllers
+namespace PWC.US.USTO.BOSSearch.Controllers
 {
     public class GetCompanyDetailController : ApiController
     {
@@ -49,10 +49,16 @@ namespace BOSSearch.Controllers
         /// string url = "http://10.22.53.151:9080/USMDMV2/REST/party?" + sbParam;
         /// </summary>
         /// <param name="sourcePartyId"></param>
-        /// <param name="partyId"></param>
         /// <returns></returns>
         public object GetPartyDetails(string sourcePartyId)
         {
+            //input param check
+            if (string.IsNullOrEmpty(sourcePartyId))
+            {
+                return null;
+            }
+
+            //params defines
             string responeContent = string.Empty;
             string serviceURL = string.Empty;
             serviceURL = Constants.APIURL_Prodect;
@@ -60,15 +66,12 @@ namespace BOSSearch.Controllers
             Instrument inStrument = new Instrument();
             PartyDetailSearchResult partyResult = new PartyDetailSearchResult();
 
-            if (string.IsNullOrEmpty(sourcePartyId))
-            {
-                return null;
-            }
+            //Get URL 
             sourcePartyId = inStrument.HandleSpecialCharacters(sourcePartyId);
-
             sbParam = GetParams(sourcePartyId);
             serviceURL = serviceURL + "?" + sbParam.ToString();
 
+            //Init http request
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(serviceURL);
             httpWebRequest.ContentType = "application/xml";
             httpWebRequest.Method = "POST";
@@ -76,6 +79,7 @@ namespace BOSSearch.Controllers
             httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
             httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
             
+            //send http request
             byte[] bStream = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
             httpWebRequest.ContentLength = bStream.Length;
             using (Stream stream = httpWebRequest.GetRequestStream())
@@ -84,6 +88,7 @@ namespace BOSSearch.Controllers
             }
             try
             {
+                //Get http response
                 HttpWebResponse httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 StreamReader streamReader = new StreamReader(httpWebResponse.GetResponseStream(), UTF8Encoding.UTF8);
                 responeContent = streamReader.ReadToEnd();
@@ -94,6 +99,8 @@ namespace BOSSearch.Controllers
                 {
                     return null;
                 }
+
+                //rebuild the returned xml data 
                 XmlDocument xmlDoc = inStrument.GetXmlDocByXmlContent(responeContent);
                 string[] paramArray = { };
                 string statusValue = inStrument.GetNodeValue(xmlDoc, "overallStatus", paramArray);
@@ -123,7 +130,6 @@ namespace BOSSearch.Controllers
         /// prepare for params of sourcePartyID and partyId
         /// </summary>
         /// <param name="sourcePartyId"></param>
-        /// <param name="partyId"></param>
         /// <returns></returns>
         private StringBuilder GetParams(string sourcePartyId)
         {
@@ -143,7 +149,7 @@ namespace BOSSearch.Controllers
         /// <summary>
         /// Get party details of code and desc in xml
         /// </summary>
-        /// <param name="doc"></param>
+        /// <param name="xmlDoc"></param>
         /// <returns></returns>
         private PartyDetailSearchResult GetPartyFromXML(XDocument xmlDoc)
         {

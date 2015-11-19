@@ -25,7 +25,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace BOSSearch.Models
+namespace PWC.US.USTO.BOSSearch.Models
 {
     public class BOSSearchContext : DbContext
     {
@@ -40,9 +40,9 @@ namespace BOSSearch.Models
         {
         }
 
-        public System.Data.Entity.DbSet<BOSSearch.Models.CompanyStatus> CompanyStatus { get; set; }
+        public System.Data.Entity.DbSet<PWC.US.USTO.BOSSearch.Models.CompanyStatus> CompanyStatus { get; set; }
 
-        public System.Data.Entity.DbSet<BOSSearch.Models.Company> Companies { get; set; }
+        public System.Data.Entity.DbSet<PWC.US.USTO.BOSSearch.Models.Company> Companies { get; set; }
     
     }
 }

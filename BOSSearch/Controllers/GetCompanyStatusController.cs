@@ -24,7 +24,7 @@
 //  Issue number        : 1.1
 /////////////////////////////////////////////////////////////////////////////////////////
 
-using BOSSearch.Models;
+using PWC.US.USTO.BOSSearch.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,12 +33,12 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using BOSSearch.Function;
+using PWC.US.USTO.BOSSearch.Function;
 using System.Xml.Linq;
 using System.Web.Script.Serialization;
 
 
-namespace BOSSearch.Controllers
+namespace PWC.US.USTO.BOSSearch.Controllers
 {
     public class GetCompanyStatusController : ApiController
     {

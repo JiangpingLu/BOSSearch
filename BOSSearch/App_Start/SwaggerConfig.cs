@@ -26,12 +26,12 @@
 
 using System.Web.Http;
 using WebActivatorEx;
-using BOSSearch;
+using PWC.US.USTO.BOSSearch;
 using Swashbuckle.Application;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace BOSSearch
+namespace PWC.US.USTO.BOSSearch
 {
     public class SwaggerConfig
     {
