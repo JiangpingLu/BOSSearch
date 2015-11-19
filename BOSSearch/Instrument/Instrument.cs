@@ -129,7 +129,7 @@ namespace PWC.US.USTO.BOSSearch.Function
             }
             catch
             {
-                throw new Exception(string.Format("请确认该XML文件格式，路径为：{0}", xmlFilePath));
+                throw new Exception(string.Format("Please confim the file format，file path should be：{0}", xmlFilePath));
             }
 
             return xDoc;
@@ -139,8 +139,8 @@ namespace PWC.US.USTO.BOSSearch.Function
         /// Get node value by nodename
         /// </summary>
         /// <param name="doc"></param>
-        /// <param name="nodeName">节点名</param>
-        /// <param name="nodeAttribute">属性名</param>
+        /// <param name="nodeName"></param>
+        /// <param name="nodeAttribute"></param>
         /// <returns></returns>
         public string GetNodeValue(XmlDocument doc, string nodeName, params string[] nodeAttribute)
         {

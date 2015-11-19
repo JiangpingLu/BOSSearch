@@ -88,7 +88,7 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //To do log the exception
             }
