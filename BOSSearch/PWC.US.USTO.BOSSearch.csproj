@@ -188,6 +188,8 @@
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
     <Content Include="XMLFile_Hardcode_Source.xml" />
+    <None Include="Properties\PublishProfiles\BOSMDMProd - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\BOSMDMProd - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\BOSSearch - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\BOSSearch - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
