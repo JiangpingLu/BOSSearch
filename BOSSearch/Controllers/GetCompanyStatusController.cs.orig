@@ -55,12 +55,21 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         public List<PartySearchResult> GetParties(string partyName, string city, string state)
         {
             //build request
+<<<<<<< HEAD
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Prodect);
+            request.Method = "POST";
+            request.ContentType = "application/xml";
+            request.Headers.Add("usmdm-action", "SB4C");
+            request.Headers.Add("APIkey", Constants.APIkey_Product);
+            request.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
+=======
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Prodect);
             httpWebRequest.Method = "POST";
             httpWebRequest.ContentType = "application/xml";
             httpWebRequest.Headers.Add("usmdm-action", "SB4C");
             httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
             httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
+>>>>>>> Bossearch/Product
 
             //pass data
             Instrument inStrument = new Instrument();

@@ -1,4 +1,25 @@
-﻿using System;
+﻿//-------------------------------------------------------------------------------
+// <Copyright file="Instrument.cs" company="PwC">
+// © 2014 PwC. All rights reserved.
+// </Copyright>
+// "PwC" refers to PricewaterhouseCoopers LLP, a Delaware limited liability 
+// partnership, which is a member firm of PricewaterhouseCoopers International 
+// Limited, each member firm of which is a separate legal entity.
+// ---------------------------------------------------------------------------------
+//	File Description	: It's the public functions for all API
+// ---------------------------------------------------------------------------------
+//	Date Created		: Nov 05, 2015
+//	Author			    : <Haley Qu>, SDC Shanghai
+// ---------------------------------------------------------------------------------
+// 	Change History
+//          Add description
+//	Date Modified		: Nov 17, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.0
+/////////////////////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,10 +28,15 @@ using System.Xml;
 using System.IO;
 using System.Xml.Linq; 
 
-namespace BOSSearch.Function
+namespace PWC.US.USTO.BOSSearch.Function
 {
     public class Instrument
     {
+        /// <summary>
+        /// Get Element value by XElement
+        /// </summary>
+        /// <param name="element"></param>
+        /// <returns></returns>
         public string GetElementValue(XElement element)
         {
             if (null != element)
@@ -20,6 +46,12 @@ namespace BOSSearch.Function
 
             return string.Empty;
         }
+
+        /// <summary>
+        /// convert special characters to ESC
+        /// </summary>
+        /// <param name="rawstr"></param>
+        /// <returns></returns>
         public string HandleSpecialCharacters(string rawstr)
         {
             if (string.IsNullOrEmpty(rawstr))
@@ -34,7 +66,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// XML转Json
+        /// change format from XML to Json
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
@@ -54,7 +86,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// 根据XML文件内容获取XmlDocument对象
+        /// Get XmlDocument object from xml file
         /// </summary>
         /// <param name="xmlFileContent"></param>
         /// <returns></returns>
@@ -79,7 +111,7 @@ namespace BOSSearch.Function
         }
 
         /// <summary>
-        /// 根据XML文件路径获取XmlDocument对象
+        /// Get XmlDocument object by xml file path
         /// </summary>
         /// <param name="xmlFilePath"></param>
         /// <returns></returns>
@@ -97,18 +129,18 @@ namespace BOSSearch.Function
             }
             catch
             {
-                throw new Exception(string.Format("请确认该XML文件格式，路径为：{0}", xmlFilePath));
+                throw new Exception(string.Format("Please confim the file format，file path should be：{0}", xmlFilePath));
             }
 
             return xDoc;
         }
 
         /// <summary>
-        /// 获取指定节点值
+        /// Get node value by nodename
         /// </summary>
         /// <param name="doc"></param>
-        /// <param name="nodeName">节点名</param>
-        /// <param name="nodeAttribute">属性名</param>
+        /// <param name="nodeName"></param>
+        /// <param name="nodeAttribute"></param>
         /// <returns></returns>
         public string GetNodeValue(XmlDocument doc, string nodeName, params string[] nodeAttribute)
         {

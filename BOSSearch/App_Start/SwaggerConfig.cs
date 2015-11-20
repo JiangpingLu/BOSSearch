@@ -1,11 +1,37 @@
+//-------------------------------------------------------------------------------
+// <Copyright file="SwaggerConfig.cs" company="PwC">
+// © 2014 PwC. All rights reserved.
+// </Copyright>
+// "PwC" refers to PricewaterhouseCoopers LLP, a Delaware limited liability 
+// partnership, which is a member firm of PricewaterhouseCoopers International 
+// Limited, each member firm of which is a separate legal entity.
+// ---------------------------------------------------------------------------------
+//	File Description	: It's the config for the api interface test
+// ---------------------------------------------------------------------------------
+//	Date Created		: Nov 05, 2015
+//	Author			    : <Haley Qu>, SDC Shanghai
+// ---------------------------------------------------------------------------------
+// 	Change History
+//          Add description
+//	Date Modified		: Nov 17, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.0
+//          layout format
+//	Date Modified		: Nov 18, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.1
+/////////////////////////////////////////////////////////////////////////////////////////
+
 using System.Web.Http;
 using WebActivatorEx;
-using BOSSearch;
+using PWC.US.USTO.BOSSearch;
 using Swashbuckle.Application;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
-namespace BOSSearch
+namespace PWC.US.USTO.BOSSearch
 {
     public class SwaggerConfig
     {

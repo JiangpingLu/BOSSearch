@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace BOSSearch
+namespace PWC.US.USTO.BOSSearch
 {
     public class BundleConfig
     {
