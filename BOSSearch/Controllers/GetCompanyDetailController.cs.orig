@@ -52,7 +52,18 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         /// <returns></returns>
         public object GetPartyDetails(string sourcePartyId)
         {
+<<<<<<< HEAD
+            string responcontent = string.Empty;
+            string url = string.Empty;
+            url = Constants.APIURL_Prodect;
+            //url = Constants.APIURL_PublicTest;
+            StringBuilder sbParam = new StringBuilder();
+            Instrument instrument = new Instrument();
+            PartyDetailSearchResult res = new PartyDetailSearchResult();
+
+=======
             //input param check
+>>>>>>> Bossearch/Product
             if (string.IsNullOrEmpty(sourcePartyId))
             {
                 return null;
@@ -78,10 +89,18 @@ namespace PWC.US.USTO.BOSSearch.Controllers
             httpWebRequest.Headers.Add("usmdm-action", "GET");
             httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
             httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
+<<<<<<< HEAD
+            //httpWebRequest.Headers.Add("APIkey", Constants.APIkey);
+            //httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret);
+            
+            byte[] bs = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
+            httpWebRequest.ContentLength = bs.Length;
+=======
             
             //send http request
             byte[] bStream = System.Text.Encoding.Default.GetBytes(sbParam.ToString());
             httpWebRequest.ContentLength = bStream.Length;
+>>>>>>> Bossearch/Product
             using (Stream stream = httpWebRequest.GetRequestStream())
             {
                 stream.Write(bStream, 0, bStream.Length);

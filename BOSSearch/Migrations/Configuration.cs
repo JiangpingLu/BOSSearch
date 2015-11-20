@@ -1,19 +1,45 @@
-namespace BOSSearch.Migrations
+//-------------------------------------------------------------------------------
+// <Copyright file="Configuration.cs" company="PwC">
+// © 2014 PwC. All rights reserved.
+// </Copyright>
+// "PwC" refers to PricewaterhouseCoopers LLP, a Delaware limited liability 
+// partnership, which is a member firm of PricewaterhouseCoopers International 
+// Limited, each member firm of which is a separate legal entity.
+// ---------------------------------------------------------------------------------
+//	File Description	: It's the business controller code for the function of GetCompanyStatus 
+// ---------------------------------------------------------------------------------
+//	Date Created		: Nov 05, 2015
+//	Author			    : <Keen Guo>, SDC Shanghai
+// ---------------------------------------------------------------------------------
+// 	Change History
+//          Add description
+//	Date Modified		: Nov 17, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.0
+//          layout format
+//	Date Modified		: Nov 18, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add header description
+//  Issue number        : 1.1
+/////////////////////////////////////////////////////////////////////////////////////////
+
+namespace PWC.US.USTO.BOSSearch.Migrations
 {
-    using BOSSearch.Models;
+    using PWC.US.USTO.BOSSearch.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BOSSearch.Models.BOSSearchContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PWC.US.USTO.BOSSearch.Models.BOSSearchContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BOSSearch.Models.BOSSearchContext context)
+        protected override void Seed(PWC.US.USTO.BOSSearch.Models.BOSSearchContext context)
         {
             //  This method will be called after migrating to the latest version.
 

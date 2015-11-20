@@ -8,9 +8,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BOSSearch")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("PricewaterhouseCoopers LLP")]
+//[assembly: AssemblyCompany("PricewaterhouseCoopers LLP")]
+[assembly: AssemblyCompany("\"PwC\" refers to PricewaterhouseCoopers LLP, a Delaware limited liability partnership, which is a member firm of PricewaterhouseCoopers International Limited, each member firm of which is a separate legal entity.")]
 [assembly: AssemblyProduct("BOSSearch")]
-[assembly: AssemblyCopyright("Copyright © PricewaterhouseCoopers LLP 2015")]
+//[assembly: AssemblyCopyright("Copyright © PricewaterhouseCoopers LLP 2015")]
+[assembly: AssemblyCopyright("© 2015 PwC. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
