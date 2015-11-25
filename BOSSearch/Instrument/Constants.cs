@@ -43,6 +43,11 @@ namespace PWC.US.USTO.BOSSearch.Function
         /// The URL of product
         /// </summary>
         public static readonly string APIURL_Prodect = "https://apim.pwc.com/USMDM/REST/v1/party";
+
+        /// <summary>
+        /// validate address in SmartyStreets
+        /// </summary>
+        public static readonly string APIURL_SmartyStreets = "https://api.smartystreets.com/street-address";
         #endregion
 
         #region APIKey for public internet test
@@ -53,6 +58,11 @@ namespace PWC.US.USTO.BOSSearch.Function
         #region APIKey for product using
         public static readonly string APIkey_Product = "l7xxebb0dc475876434c92e0f05978c800fb";
         public static readonly string APIKeySecret_Product = "7a985141b76e465b8dcff7eeb4edd30c";
+        #endregion
+
+        #region Auth Id and Token for SmartyStreets
+        public static readonly string AuthId = "83f42eea-3154-677c-2f3d-2b4c06fabecb";
+        public static readonly string AuthToken = "cibOSU4837WS893nqN7h";
         #endregion
 
     }

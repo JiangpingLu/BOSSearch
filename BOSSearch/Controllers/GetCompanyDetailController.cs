@@ -66,6 +66,20 @@ namespace PWC.US.USTO.BOSSearch.Controllers
             Instrument inStrument = new Instrument();
             PartyDetailSearchResult partyResult = new PartyDetailSearchResult();
 
+            //Add Test data
+            if (sourcePartyId == "pwc1234567890")
+            {
+                partyResult.IndependenceStatus = "Unrestricted";
+                partyResult.IndependenceStatusCode = "10002";
+                return partyResult;
+            }
+            else if (sourcePartyId == "pwc1234567891")
+            {
+                partyResult.IndependenceStatus = "Restricted";
+                partyResult.IndependenceStatusCode = "10001";
+                return partyResult;
+            }
+
             //Get URL 
             sourcePartyId = inStrument.HandleSpecialCharacters(sourcePartyId);
             sbParam = GetParams(sourcePartyId);

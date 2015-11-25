@@ -93,7 +93,41 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 //To do log the exception
             }
             XDocument xDoc = XDocument.Parse(response);
-            return ReadXML(xDoc);
+            //return ReadXML(xDoc);
+
+            //Add Test data
+            List<PartySearchResult> partyRes = ReadXML(xDoc);
+            if (partyName == "Morgan" && city == "Burbank" && state == "CA")
+            {
+                PartySearchResult res = new PartySearchResult();
+                res.SourcePartyId = "pwc1234567890";
+                res.PartyName = "pwc";
+                List<Address> addressses = new List<Address>();
+                Address add = new Address();
+                add.AddressLine = "Unrestricted Address";
+                add.City = "Restricted";
+                add.State = "CA";
+                add.ZipCode = "10000";
+                addressses.Add(add);
+                res.PrimaryAddresses = addressses;
+                partyRes.Add(res);
+
+                PartySearchResult res1 = new PartySearchResult();
+                List<Address> addressses1 = new List<Address>();
+                Address add1 = new Address();
+                res1.SourcePartyId = "pwc1234567891";
+                res1.PartyName = "pwc1";
+                add1.AddressLine = "Restricted Address";
+                add1.City = "Determined";
+                add1.State = "CA";
+                add1.ZipCode = "10001";
+                addressses1.Add(add1);
+                res1.PrimaryAddresses = addressses1;
+                partyRes.Add(res1);
+            }
+            return partyRes;
+
+
             //var XMLLoadfullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XMLFile_Hardcode_Source.xml");
             //XDocument xdoc = XDocument.Load(XMLLoadfullPath);
             //List<PartySearchResult> Parties = ReadXML(xdoc);
@@ -125,9 +159,9 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                                                                            ZipCode = instrument.GetElementValue(address.Element("postalCode"))
                                                                        }).ToList(),
                                                }).ToList();
-
             return partyResults;
         }
+
 
     }
 }

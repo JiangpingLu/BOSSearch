@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -155,6 +156,7 @@
     <Compile Include="Controllers\GetCompanyDetailController.cs" />
     <Compile Include="Controllers\GetCompanyStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ValidateAddressController.cs" />
     <Compile Include="DAL\test.cs" />
     <Compile Include="Instrument\Constants.cs" />
     <Compile Include="Instrument\Instrument.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="Models\SourceParty.cs" />
     <Compile Include="Models\PartySearchResult.cs" />
     <Compile Include="Models\PartyType.cs" />
+    <Compile Include="Models\ValidatedAddressResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -189,7 +192,9 @@
     <Content Include="apiapp.json" />
     <Content Include="XMLFile_Hardcode_Source.xml" />
     <None Include="Properties\PublishProfiles\BOSMDMProd - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\BOSMDMProd - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\BOSMDMProd - Web Deploy.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\BOSSearch - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\BOSSearch - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
