@@ -17,6 +17,11 @@
 //	Changed By		    : AJ
 //	Change Description  : Add header description
 //  Issue number        : 1.o
+//          Add description
+//	Date Modified		: Nov 25, 2015
+//	Changed By		    : AJ
+//	Change Description  : Add authid of SmartyStreets for the API of ValidateAddress
+//  Issue number        : 1.0
 /////////////////////////////////////////////////////////////////////////////////////////
 
 using System;
