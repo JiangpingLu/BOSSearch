@@ -74,7 +74,7 @@ namespace PWC.US.USTO.BOSSearch.Controllers
             //Add Test data
             if (sourcePartyId == "pwc1234567890")
             {
-                partyResult.IndependenceStatus = "Unrestricted";
+                partyResult.IndependenceStatus = "UnRestricted";
                 partyResult.IndependenceStatusCode = "10002";
                 return partyResult;
             }

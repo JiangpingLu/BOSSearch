@@ -60,12 +60,12 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         public List<PartySearchResult> GetParties(string partyName, string city, string state)
         {
             //build request
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Prodect);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Public);
             httpWebRequest.Method = "POST";
             httpWebRequest.ContentType = "application/xml";
             httpWebRequest.Headers.Add("usmdm-action", "SB4C");
-            httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
-            httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
+            httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Public);
+            httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Public);
 
             //pass data
             Instrument inStrument = new Instrument();
@@ -109,8 +109,8 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 res.PartyName = "pwc";
                 List<Address> addressses = new List<Address>();
                 Address add = new Address();
-                add.AddressLine = "Unrestricted Address";
-                add.City = "Restricted";
+                add.AddressLine = "UnRestricted Address";
+                add.City = "UnRestricted";
                 add.State = "CA";
                 add.ZipCode = "10000";
                 addressses.Add(add);
@@ -123,7 +123,7 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 res1.SourcePartyId = "pwc1234567891";
                 res1.PartyName = "pwc1";
                 add1.AddressLine = "Restricted Address";
-                add1.City = "Determined";
+                add1.City = "Restricted";
                 add1.State = "CA";
                 add1.ZipCode = "10001";
                 addressses1.Add(add1);

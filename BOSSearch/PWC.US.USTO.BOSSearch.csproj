@@ -57,6 +57,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.Core.5.0.0\lib\net40\Swashbuckle.Core.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +161,7 @@
     <Compile Include="Controllers\GetCompanyStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValidateAddressController.cs" />
+    <Compile Include="Controllers\ValidateAddressForTestController.cs" />
     <Compile Include="DAL\test.cs" />
     <Compile Include="Instrument\Constants.cs" />
     <Compile Include="Instrument\Instrument.cs" />
@@ -197,6 +202,7 @@
     </None>
     <None Include="Properties\PublishProfiles\BOSSearch - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\BOSSearch - Web Deploy.pubxml" />
+    <Content Include="Properties\webjobs-list.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
