@@ -3,6 +3,9 @@
   "WebJobs": [
     {
       "filePath": "../BOSMDMProdConsoleApp/BOSMDMProdConsoleApp.csproj"
+    },
+    {
+      "filePath": "../BOSMDMProdConsoleApp/BOSMDMProdConsoleApp.csproj"
     }
   ]
 }

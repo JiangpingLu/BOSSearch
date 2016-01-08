@@ -47,6 +47,25 @@ namespace PWC.US.USTO.BOSSearch.Function
             return string.Empty;
         }
 
+        public bool IsElementExist(XElement element)
+        {
+            bool res = true;
+            try 
+            {
+                if (null == element)
+                {
+                    res = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                res = false;
+                Console.WriteLine(ex.InnerException);
+            }
+            return res;
+   
+        }
+
         /// <summary>
         /// convert special characters to ESC
         /// </summary>

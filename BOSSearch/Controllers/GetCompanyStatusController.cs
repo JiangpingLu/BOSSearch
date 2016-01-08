@@ -148,22 +148,27 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         private List<PartySearchResult> ReadXML(XDocument xDoc)
         {
             Instrument instrument = new Instrument();
+
             List<PartySearchResult> partyResults = (from party in xDoc.Descendants("partySearchResults").Elements("partySearchResult")
-                                               select new PartySearchResult
-                                               {
-                                                   SourcePartyId = party.Element("sourcePartyId").Value,
-                                                   PartyName = party.Element("partyName").Value,
-                                                   PrimaryAddresses = (from address in party.Element("primaryAddresses").Elements("address")
-                                                                       select new Address
-                                                                       {
-                                                                           AddressLine = (instrument.GetElementValue(address.Element("addressLine1")) + " " + instrument.GetElementValue(address.Element("addressLine2"))).Trim(),
-                                                                           City = instrument.GetElementValue(address.Element("city")),
-                                                                           
-                                                                           State = instrument.GetElementValue(address.Element("state").Element("code")),
-                                                                           
-                                                                           ZipCode = instrument.GetElementValue(address.Element("postalCode"))
-                                                                       }).ToList(),
-                                               }).ToList();
+                                                    select new PartySearchResult
+                                                    {
+                                                        SourcePartyId = party.Element("sourcePartyId").Value,
+                                                        PartyName = party.Element("partyName").Value,
+                                                        PrimaryAddresses = (from address in party.Element("primaryAddresses").Elements("address")
+                                                                            select new Address
+                                                                            {
+                                                                                //AddressLine = (instrument.GetElementValue(address.Element("addressLine1")) + " " + instrument.GetElementValue(address.Element("addressLine2"))).Trim(),
+                                                                                //City = instrument.GetElementValue(address.Element("city")),
+                                                                                //State = instrument.GetElementValue(address.Element("state").Element("code")),
+                                                                                
+                                                                                //ZipCode = instrument.GetElementValue(address.Element("postalCode"))
+
+                                                                                AddressLine = (instrument.GetElementValue(instrument.IsElementExist(address.Element("addressLine1")) == false ? new XElement("NA", "") : address.Element("addressLine1")) + instrument.GetElementValue(instrument.IsElementExist(address.Element("addressLine2")) == false ? new XElement("NA", "") : address.Element("addressLine2"))).Trim(),
+                                                                                City = instrument.GetElementValue(instrument.IsElementExist(address.Element("city")) == false ? new XElement("NA", "") : address.Element("city")),
+                                                                                State = instrument.GetElementValue(instrument.IsElementExist(address.Element("state")) == false ? new XElement("NA", "") : address.Element("state").Element("code")),
+                                                                                ZipCode = instrument.GetElementValue(instrument.IsElementExist(address.Element("postalCode")) == false ? new XElement("NA", "") : address.Element("postalCode"))
+                                                                            }).ToList(),
+                                                    }).ToList();
             return partyResults;
         }
 

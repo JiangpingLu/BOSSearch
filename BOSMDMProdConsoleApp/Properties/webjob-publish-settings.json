@@ -1,9 +1,9 @@
 ﻿{
   "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
-  "webJobName": "BOSMDMProdConsoleApp123",
-  "startTime": null,
+  "webJobName": "HourTest",
+  "startTime": "2015-12-23T01:30:00-06:00",
   "endTime": null,
-  "jobRecurrenceFrequency": null,
-  "interval": null,
-  "runMode": "OnDemand"
+  "jobRecurrenceFrequency": "Hour",
+  "interval": 1,
+  "runMode": "Scheduled"
 }

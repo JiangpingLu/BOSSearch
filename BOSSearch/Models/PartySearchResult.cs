@@ -41,5 +41,6 @@ namespace PWC.US.USTO.BOSSearch.Models
         //public IEnumerable<Identifier> Identifiers { get; set; }
         public IEnumerable<Address> PrimaryAddresses { get; set; }
         //public string EncryptedDUNS { get; set; }
+        public int count { get; set; }
     }
 }
