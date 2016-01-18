@@ -57,7 +57,7 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         /// <param name="city">Burbank</param>
         /// <param name="state">CA</param>
         /// <returns></returns>
-        public List<PartySearchResult> GetParties(string partyName, string city, string state)
+        public PartySearchAllResults GetParties(string partyName, string city, string state)//List<PartySearchResult>
         {
             //build request
             HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Public);
@@ -78,6 +78,8 @@ namespace PWC.US.USTO.BOSSearch.Controllers
             }
 
             //get response
+            PartySearchAllResults parties = new PartySearchAllResults();
+            List<PartySearchResult> partyRes = new List<PartySearchResult>();
             string response = string.Empty;
             try
             {
@@ -93,15 +95,26 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                parties.ErrorMessage = ex.Message;
                 //To do log the exception
             }
+
+            
+            //check if response is null or empty
+            if (response == null || response.Length <= 0)
+            {
+                parties.IsSuccess = false;
+                parties.PartySearchResults = null;
+                return parties;
+            }
+
             XDocument xDoc = XDocument.Parse(response);
             //return ReadXML(xDoc);
 
             //Add Test data
-            List<PartySearchResult> partyRes = ReadXML(xDoc);
+            partyRes = ReadXML(xDoc);
             if (partyName == "Morgan" && city == "Burbank" && state == "CA")
             {
                 PartySearchResult res = new PartySearchResult();
@@ -130,9 +143,10 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 res1.PrimaryAddresses = addressses1;
                 partyRes.Add(res1);
             }
-            return partyRes;
-
-
+            parties.IsSuccess = true;
+            parties.ErrorMessage = "";
+            parties.PartySearchResults = partyRes;
+            return parties;
             //var XMLLoadfullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XMLFile_Hardcode_Source.xml");
             //XDocument xdoc = XDocument.Load(XMLLoadfullPath);
             //List<PartySearchResult> Parties = ReadXML(xdoc);

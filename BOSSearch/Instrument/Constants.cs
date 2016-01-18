@@ -66,8 +66,8 @@ namespace PWC.US.USTO.BOSSearch.Function
         #endregion
 
         #region Auth Id and Token for SmartyStreets
-        public static readonly string AuthId = "fb4d677b-ec38-5e09-200c-a783606b5d36";//"83f42eea-3154-677c-2f3d-2b4c06fabecb";
-        public static readonly string AuthToken = "pNwKBviFU7BHj98cN6D8";//"cibOSU4837WS893nqN7h";
+        public static readonly string AuthId = "83f42eea-3154-677c-2f3d-2b4c06fabecb";//"fb4d677b-ec38-5e09-200c-a783606b5d36";
+        public static readonly string AuthToken = "cibOSU4837WS893nqN7h";//"pNwKBviFU7BHj98cN6D8";
         #endregion
 
     }

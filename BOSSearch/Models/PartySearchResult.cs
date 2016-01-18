@@ -43,4 +43,14 @@ namespace PWC.US.USTO.BOSSearch.Models
         //public string EncryptedDUNS { get; set; }
         public int count { get; set; }
     }
+
+    public class PartySearchAllResults
+    {
+        public bool IsSuccess { get; set; }
+
+        public string ErrorMessage { get; set; }
+        
+        public List<PartySearchResult> PartySearchResults { get; set; }
+
+    }
 }
