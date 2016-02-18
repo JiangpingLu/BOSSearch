@@ -50,7 +50,7 @@ namespace PWC.US.USTO.BOSSearch.Models
 
         public string ErrorMessage { get; set; }
         
-        public List<PartySearchResult> PartySearchResults { get; set; }
+        public List<PartySearchResult> Results { get; set; }
 
     }
 }

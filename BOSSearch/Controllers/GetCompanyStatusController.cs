@@ -41,6 +41,7 @@ using System.Web.Http;
 using PWC.US.USTO.BOSSearch.Function;
 using System.Xml.Linq;
 using System.Web.Script.Serialization;
+using System.Xml;
 
 
 namespace PWC.US.USTO.BOSSearch.Controllers
@@ -60,12 +61,12 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         public PartySearchAllResults GetParties(string partyName, string city, string state)//List<PartySearchResult>
         {
             //build request
-            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Public);
+            HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create(Constants.APIURL_Prodect);
             httpWebRequest.Method = "POST";
             httpWebRequest.ContentType = "application/xml";
             httpWebRequest.Headers.Add("usmdm-action", "SB4C");
-            httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Public);
-            httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Public);
+            httpWebRequest.Headers.Add("APIkey", Constants.APIkey_Product);
+            httpWebRequest.Headers.Add("APIKeySecret", Constants.APIKeySecret_Product);
 
             //pass data
             Instrument inStrument = new Instrument();
@@ -97,55 +98,84 @@ namespace PWC.US.USTO.BOSSearch.Controllers
             }
             catch (Exception ex)
             {
+                parties.IsSuccess = false;
                 parties.ErrorMessage = ex.Message;
+                parties.Results = null;
+                return parties;
                 //To do log the exception
             }
 
-            
             //check if response is null or empty
             if (response == null || response.Length <= 0)
             {
                 parties.IsSuccess = false;
-                parties.PartySearchResults = null;
+                parties.ErrorMessage = "The response is null or empty!";
+                parties.Results = null;
                 return parties;
             }
 
+            XmlDocument xmlDoc = inStrument.GetXmlDocByXmlContent(response);
+            string[] paramArray = { };
+            string statusValue = inStrument.GetNodeValue(xmlDoc, "overallStatus", paramArray);
+            string statusDesc = inStrument.GetNodeValue(xmlDoc, "statusMessageDescription", paramArray);
+            string statusMessageCode = inStrument.GetNodeValue(xmlDoc, "statusMessageCode", paramArray);
+
             XDocument xDoc = XDocument.Parse(response);
             //return ReadXML(xDoc);
-
-            //Add Test data
-            partyRes = ReadXML(xDoc);
-            if (partyName == "Morgan" && city == "Burbank" && state == "CA")
+            //XDocument xdoc = XDocument.Parse(response);
+            if (statusValue.Equals("Success"))
             {
-                PartySearchResult res = new PartySearchResult();
-                res.SourcePartyId = "pwc1234567890";
-                res.PartyName = "pwc";
-                List<Address> addressses = new List<Address>();
-                Address add = new Address();
-                add.AddressLine = "UnRestricted Address";
-                add.City = "UnRestricted";
-                add.State = "CA";
-                add.ZipCode = "10000";
-                addressses.Add(add);
-                res.PrimaryAddresses = addressses;
-                partyRes.Add(res);
+                partyRes = ReadXML(xDoc);
 
-                PartySearchResult res1 = new PartySearchResult();
-                List<Address> addressses1 = new List<Address>();
-                Address add1 = new Address();
-                res1.SourcePartyId = "pwc1234567891";
-                res1.PartyName = "pwc1";
-                add1.AddressLine = "Restricted Address";
-                add1.City = "Restricted";
-                add1.State = "CA";
-                add1.ZipCode = "10001";
-                addressses1.Add(add1);
-                res1.PrimaryAddresses = addressses1;
-                partyRes.Add(res1);
+                //Add Test data
+                if (partyName == "Morgan" && city == "Burbank" && state == "CA")
+                {
+                    PartySearchResult res = new PartySearchResult();
+                    res.SourcePartyId = "pwc1234567890";
+                    res.PartyName = "pwc";
+                    List<Address> addressses = new List<Address>();
+                    Address add = new Address();
+                    add.AddressLine = "UnRestricted Address";
+                    add.City = "UnRestricted";
+                    add.State = "CA";
+                    add.ZipCode = "10000";
+                    addressses.Add(add);
+                    res.PrimaryAddresses = addressses;
+                    partyRes.Add(res);
+
+                    PartySearchResult res1 = new PartySearchResult();
+                    List<Address> addressses1 = new List<Address>();
+                    Address add1 = new Address();
+                    res1.SourcePartyId = "pwc1234567891";
+                    res1.PartyName = "pwc1";
+                    add1.AddressLine = "Restricted Address";
+                    add1.City = "Restricted";
+                    add1.State = "CA";
+                    add1.ZipCode = "10001";
+                    addressses1.Add(add1);
+                    res1.PrimaryAddresses = addressses1;
+                    partyRes.Add(res1);
+                }
+                parties.IsSuccess = true;
+                parties.ErrorMessage = "";
+                parties.Results = partyRes;
+                //res = new JavaScriptSerializer().Serialize(GetPartyFromXML(xdoc));
             }
-            parties.IsSuccess = true;
-            parties.ErrorMessage = "";
-            parties.PartySearchResults = partyRes;
+            else
+            {
+                if (statusMessageCode == "DRS-004")
+                {
+                    parties.IsSuccess = true;
+                    parties.ErrorMessage = "";
+                }
+                else
+                {
+                    parties.IsSuccess = false;
+                    parties.ErrorMessage = statusDesc;
+                }
+                parties.Results = new List<PartySearchResult>();
+            }
+
             return parties;
             //var XMLLoadfullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "XMLFile_Hardcode_Source.xml");
             //XDocument xdoc = XDocument.Load(XMLLoadfullPath);

@@ -34,4 +34,13 @@ namespace PWC.US.USTO.BOSSearch.Models
 
         public string Plus4Zipcode { get; set; }
     }
+
+    public class ValidatedAddressAllResults
+    {
+        public bool IsSuccess { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public ValidatedAddressResult Results { get; set; }
+    }
 }

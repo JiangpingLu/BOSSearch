@@ -57,32 +57,44 @@ namespace PWC.US.USTO.BOSSearch.Controllers
         /// <returns></returns>
         public object GetPartyDetails(string sourcePartyId)
         {
-            //input param check
-            if (string.IsNullOrEmpty(sourcePartyId))
-            {
-                return null;
-            }
-
             //params defines
             string responeContent = string.Empty;
             string serviceURL = string.Empty;
             serviceURL = Constants.APIURL_Prodect;
             StringBuilder sbParam = new StringBuilder();
             Instrument inStrument = new Instrument();
+            PartyDetailSearchAllResult partyDetailSearchAllRes = new PartyDetailSearchAllResult();
             PartyDetailSearchResult partyResult = new PartyDetailSearchResult();
+
+            //input param check
+            if (string.IsNullOrEmpty(sourcePartyId))
+            {
+                partyDetailSearchAllRes.IsSuccess = false;
+                partyDetailSearchAllRes.ErrorMessage = "SourcePartyId should not be null or empty!";
+                partyResult.IndependenceStatus = "";
+                partyResult.IndependenceStatusCode = "";
+                partyDetailSearchAllRes.Results = partyResult;
+                return partyDetailSearchAllRes;
+            }
 
             //Add Test data
             if (sourcePartyId == "pwc1234567890")
             {
+                partyDetailSearchAllRes.IsSuccess = true;
+                partyDetailSearchAllRes.ErrorMessage = "";
                 partyResult.IndependenceStatus = "UnRestricted";
                 partyResult.IndependenceStatusCode = "10002";
-                return partyResult;
+                partyDetailSearchAllRes.Results = partyResult;
+                return partyDetailSearchAllRes;
             }
             else if (sourcePartyId == "pwc1234567891")
             {
+                partyDetailSearchAllRes.IsSuccess = true;
+                partyDetailSearchAllRes.ErrorMessage = "";
                 partyResult.IndependenceStatus = "Restricted";
                 partyResult.IndependenceStatusCode = "10001";
-                return partyResult;
+                partyDetailSearchAllRes.Results = partyResult;
+                return partyDetailSearchAllRes;
             }
 
             //Get URL 
@@ -114,9 +126,13 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 httpWebResponse.Close();
                 streamReader.Close();
 
+                //if response is null or empty
                 if (responeContent.Trim().Length <= 0)
                 {
-                    return null;
+                    partyDetailSearchAllRes.IsSuccess = false;
+                    partyDetailSearchAllRes.ErrorMessage = httpWebResponse.StatusDescription;
+                    partyDetailSearchAllRes.Results=null;
+                    return partyDetailSearchAllRes;
                 }
 
                 //rebuild the returned xml data 
@@ -128,21 +144,26 @@ namespace PWC.US.USTO.BOSSearch.Controllers
                 XDocument xdoc = XDocument.Parse(responeContent);
                 if (statusValue.Equals("Success"))
                 {
+                    partyDetailSearchAllRes.IsSuccess = true;
+                    partyDetailSearchAllRes.ErrorMessage = "";
                     partyResult = GetPartyFromXML(xdoc);
+                    partyDetailSearchAllRes.Results = partyResult;
                     //res = new JavaScriptSerializer().Serialize(GetPartyFromXML(xdoc));
                 }
                 else
                 {
-                    partyResult.IndependenceStatus = statusDesc;
-                    partyResult.IndependenceStatusCode = "-1";
+                    partyDetailSearchAllRes.IsSuccess = false;
+                    partyDetailSearchAllRes.ErrorMessage = statusDesc;
+                    partyDetailSearchAllRes.Results = null;
                 }
             }
             catch (Exception ex)
             {
-                partyResult.IndependenceStatusCode = "-1";
-                partyResult.IndependenceStatus = ex.Message;
+                partyDetailSearchAllRes.IsSuccess = false;
+                partyDetailSearchAllRes.ErrorMessage = ex.Message;
+                partyDetailSearchAllRes.Results = null;
             }
-            return partyResult;
+            return partyDetailSearchAllRes;
         }
 
         /// <summary>

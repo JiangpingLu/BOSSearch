@@ -32,4 +32,13 @@ namespace PWC.US.USTO.BOSSearch.Models
 
         public string IndependenceStatusCode { get; set; }
     }
+
+    public class PartyDetailSearchAllResult
+    {
+        public bool IsSuccess { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public PartyDetailSearchResult Results { get; set; }
+    }
 }
